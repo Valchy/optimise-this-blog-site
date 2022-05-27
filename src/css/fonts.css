@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    font-display: block;
+    src: url(../fonts/OpenSans/OpenSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-stretch: 100%;
+    font-display: block;
+    src: url(../fonts/OpenSans/OpenSans-Medium.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-stretch: 100%;
+    font-display: block;
+    src: url(../fonts/OpenSans/OpenSans-Bold.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(../fonts/Quicksand/Quicksand-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 700;
+    font-display: block;
+    src: url(../fonts/Quicksand/Quicksand-Bold.ttf) format('truetype');
+}

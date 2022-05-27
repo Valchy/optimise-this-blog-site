@@ -1,0 +1,15 @@
+{
+  "name": "weekly-project-1",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "nodemon server.mjs",
+    "start:dist": "cross-env NODE_ENV=production node server.mjs",
+    "dev:dist": "cross-env NODE_ENV=production nodemon server.mjs"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "mime-types": "^2.1.35",
+    "nodemon": "^2.0.16"
+  }
+}

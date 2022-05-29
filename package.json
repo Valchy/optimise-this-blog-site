@@ -10,7 +10,17 @@
 	},
 	"dependencies": {
 		"cross-env": "^7.0.3",
-		"mime-types": "^2.1.35",
-		"nodemon": "^2.0.16"
+		"mime-types": "^2.1.35"
+	},
+	"devDependencies": {
+		"@node-minify/core": "^6.2.0",
+		"@node-minify/cssnano": "^6.2.0",
+		"@node-minify/html-minifier": "^6.2.0",
+		"@node-minify/uglify-es": "^6.2.0",
+		"cheerio": "^1.0.0-rc.11",
+		"colors": "^1.4.0",
+		"nodemon": "^2.0.16",
+		"resize-img": "^2.0.0",
+		"webp-converter": "^2.3.3"
 	}
 }

@@ -21,7 +21,6 @@
 		"colors": "^1.4.0",
 		"hash-files": "^1.1.1",
 		"nodemon": "^2.0.16",
-		"resize-img": "^2.0.0",
 		"webp-converter": "^2.3.3"
 	}
 }

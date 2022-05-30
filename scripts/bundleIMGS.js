@@ -1,32 +1,38 @@
 const path = require('path');
-const fs = require('fs');
 
-const resizeImg = require('resize-img');
 const webp = require('webp-converter');
 webp.grant_permission();
 
-module.exports = async function ($) {
-	try {
-		// Resizing all images and transforming them into webp format
-		$('img').map(async function () {
-			console.log(`Converting: ${$(this).attr('src')}`.cyan);
+module.exports = function ($) {
+	return new Promise((resolve, reject) => {
+		try {
+			let finishedImages = 0;
 
-			const resizedImage = await resizeImg(fs.readFileSync(path.join(__dirname, `../src/${$(this).attr('src')}`)), {
-				width: 128,
-				height: 128,
+			// Resizing all images and transforming them into webp format
+			const htmlImages = $('img');
+			htmlImages.map(async function () {
+				const imgSrc = $(this).attr('src');
+				console.log(`Converting: ${imgSrc}`.cyan);
+
+				// Getting image name (without extension)
+				let imgNameSplit = imgSrc.split('.');
+				imgNameSplit.pop();
+				let imgName = imgNameSplit.join('.');
+
+				// Saving image as webp in "dist" directory
+				await webp.cwebp(path.join(__dirname, `../src/${imgSrc}`), path.join(__dirname, `../dist/${imgName}.webp`), '-q 20').then(() => {
+					// Changing image src in html file
+					$(this).attr('src', `${imgName}.webp`);
+
+					// Resolve after last image
+					if (finishedImages === htmlImages.length - 1) resolve();
+					else finishedImages += 1;
+				});
 			});
-
-			fs.writeFileSync(path.join(__dirname, `../dist/${$(this).attr('src')}`), resizedImage);
-
-			// let webpImage = webp.cwebp(resizedImage, 'webp', '-q 80');
-			// webpImage.then(function (webpImage) {
-			// 	fs.writeFileSync(path.join(__dirname, `./dist/${$(this).attr('src')}`), webpImage);
-			// });
-
-			// $(this).attr('src', 'random.jpg');
-		});
-	} catch (err) {
-		console.error(`Error: ${err.message.white}`.red);
-		console.log('Build failed, please check the error above.'.brightRed);
-	}
+		} catch (err) {
+			console.error(`Error: ${err.message.white}`.red);
+			console.log('Build failed, please check the error above.'.brightRed);
+			reject(err.message);
+		}
+	});
 };

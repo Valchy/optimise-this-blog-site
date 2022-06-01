@@ -5,9 +5,10 @@ webp.grant_permission();
 
 module.exports = async function ($) {
 	// Resizing all images and transforming them into webp format
-	const htmlImages = $('img');
+	const htmlImages = $('img, source');
 	const results = htmlImages.map(async function () {
-		const imgSrc = $(this).attr('src');
+		const imgAttribute = $(this).attr('srcset') ? 'srcset' : 'src';
+		const imgSrc = $(this).attr(imgAttribute);
 		console.log(`Converting: ${imgSrc}`.cyan);
 
 		// Getting image name (without extension)
@@ -19,7 +20,7 @@ module.exports = async function ($) {
 		await webp.cwebp(path.join(__dirname, `../src/${imgSrc}`), path.join(__dirname, `../dist/${imgName}.webp`), '-q 20');
 
 		// Changing image src in html file
-		$(this).attr('src', `${imgName}.webp`);
+		$(this).attr(imgAttribute, `${imgName}.webp`);
 	});
 
 	// Await for all images to finish processing

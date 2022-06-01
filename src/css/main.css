@@ -109,7 +109,7 @@
 }
 
 .travell-header, .travell-header a, .travell-action-close span, .travell-top-bar {
-    font-family: 'Quicksand';
+    font-family: 'Open Sans';
     font-weight: 700;
 }
 
@@ -186,7 +186,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .entry-meta-author, .comment-author.vcard, .widget li a, .prev-next-nav a, blockquote, blockquote p, .travell-header .site-title a, .wp-block-cover .wp-block-cover-image-text, .wp-block-cover .wp-block-cover-text, .wp-block-cover h2, .wp-block-cover-image .wp-block-cover-image-text, .wp-block-cover-image .wp-block-cover-text, .wp-block-cover-image h2 {
-    font-family: 'Quicksand';
+    font-family: 'Open Sans';
     font-weight: 700;
 }
 

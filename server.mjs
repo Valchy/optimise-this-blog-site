@@ -11,8 +11,8 @@ const app = express();
 
 // Custom cache headers for assets
 const assetHeaders = (req, res, next) => {
-	// Cache static assets for 1 year and keep old file when revalidating or upon server error
-	res.set('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400, stale-if-error=86400');
+	// Cache static assets for 1 year on the browser, 7 days on CDNs and keep old file when revalidating or upon server error
+	res.set('Cache-Control', 'public, max-age=31536000, s-maxage=604800, stale-while-revalidate=86400, stale-if-error=86400');
 	next();
 };
 
@@ -27,8 +27,8 @@ app.use('/img', assetHeaders, express.static(path.join(__dirname, baseDir, '/img
 
 // Serve index file
 app.get('/', (req, res) => {
-	// 2 minute browser cache, safe to be cached on CDNs as well, will keep old html file when revalidating or upon a server error
-	res.set('Cache-Control', 'public, max-age=120, stale-while-revalidate=86400, stale-if-error=86400');
+	// 2 minute browser cache, 1 minute CDN cache, safe to be cached on CDNs as well, will keep old html file when revalidating or upon a server error
+	res.set('Cache-Control', 'public, max-age=120, s-maxage=60, stale-while-revalidate=86400, stale-if-error=86400');
 	res.sendFile(path.join(__dirname, baseDir, '/index.html'));
 });
 

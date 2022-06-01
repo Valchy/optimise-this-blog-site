@@ -10,7 +10,7 @@ module.exports = function ($) {
 
 			// Resizing all images and transforming them into webp format
 			const htmlImages = $('img');
-			htmlImages.map(async function () {
+			const results = htmlImages.map(async function () {
 				const imgSrc = $(this).attr('src');
 				console.log(`Converting: ${imgSrc}`.cyan);
 
@@ -29,6 +29,7 @@ module.exports = function ($) {
 					else finishedImages += 1;
 				});
 			});
+			// await Promise.all(results)
 		} catch (err) {
 			console.error(`Error: ${err.message.white}`.red);
 			console.log('Build failed, please check the error above.'.brightRed);

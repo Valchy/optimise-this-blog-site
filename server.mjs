@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const baseDir = process.env.NODE_ENV === 'production' ? './dist' : '/.src';
+const baseDir = process.env.NODE_ENV === 'production' ? './dist' : './src';
 const app = express();
 
 // Custom cache headers for assets

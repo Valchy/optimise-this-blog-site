@@ -1,3 +1,17 @@
+/* <![CDATA[ */
+var travell_js_settings = {
+  rtl_mode: '',
+  header_sticky_offset: '150',
+  header_sticky_up: '',
+  home_slider_autoplay: '',
+  home_slider_autoplay_time: '5',
+  use_gallery: '1',
+  home_cover_video_image_fallback: '1',
+  home_counter_animate: '',
+  cover_parallax: '',
+};
+/* ]]> */
+
 !(function (o) {
   'use strict'
   ;(o.fn.fitVids = function (t) {

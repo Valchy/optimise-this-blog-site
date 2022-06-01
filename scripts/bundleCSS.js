@@ -15,7 +15,7 @@ module.exports = async function ($) {
 
 		// Error handling => create bundle file if it doesn't exist
 		if (!fs.existsSync(cssFilePath())) {
-			fs.writeFileSync(cssFilePath(), 'utf-8');
+			fs.writeFileSync(cssFilePath(), '');
 		}
 
 		// Concatenate css into one file
@@ -30,22 +30,6 @@ module.exports = async function ($) {
 		compressor: cssnano,
 		input: cssFilePath(),
 		output: cssFilePath(),
-		// callback: (err) => {
-		// 	if (err) reject(new Error('minifying css file'));
-
-		// 	// Hashing css file and then versioning it
-		// 	// hashFileSync
-		// 	hashFiles({ files: [cssFilePath()], algorithms: 'sha256' }, (err, hash) => {
-		// 		if (err) reject(new Error('hashing css file'));
-
-		// 		// Renaming css bundle file to include content hash
-		// 		fs.renameSync(cssFilePath(), cssFilePath(`.${hash}`));
-
-		// 		// Adding css bundle script to html head
-		// 		$('head').append(`<link rel="stylesheet" href="css/main.${hash}.min.css">`);
-		// 		resolve();
-		// 	});
-		// },
 	});
 
 	// Hashing css file and then versioning it

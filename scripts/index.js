@@ -31,6 +31,6 @@ const bundleHTML = require('./bundleHTML.js');
 	await bundleIMGS($);
 	await bundleHTML($);
 })().catch((err) => {
-	console.error(`Error: ${err.message.white}`.red);
+	console.error(`\nError: ${err.message.white}`.red);
 	console.log('Build failed, please check the error above.'.brightRed);
 });

@@ -4,31 +4,21 @@ const fs = require('fs');
 const minify = require('@node-minify/core');
 const htmlMinifier = require('@node-minify/html-minifier');
 
-module.exports = function ($) {
-	try {
-		return new Promise((resolve, reject) => {
-			const htmlFilePath = path.join(__dirname, '../dist/index.html');
+module.exports = async function ($) {
+	const htmlFilePath = path.join(__dirname, '../dist/index.html');
 
-			fs.writeFile(htmlFilePath, $.html(), function (err) {
-				if (err) reject(new Error('writing html file'));
+	// Write the modified html to the "dist" directory
+	fs.writeFileSync(htmlFilePath, $.html());
 
-				minify({
-					compressor: htmlMinifier,
-					input: htmlFilePath,
-					output: htmlFilePath,
-					options: { removeAttributeQuotes: true },
-					callback: function (err) {
-						if (err) reject(new Error('minifying html file'));
+	// Minify the html file
+	await minify({
+		compressor: htmlMinifier,
+		input: htmlFilePath,
+		output: htmlFilePath,
+		options: { removeAttributeQuotes: false },
+	});
 
-						console.log('\nSuccessful build...'.brightGreen);
-						console.log('Happy hacking!'.brightGreen);
-						resolve();
-					},
-				});
-			});
-		});
-	} catch (err) {
-		console.error(`Error: ${err.message.white}`.red);
-		console.log('Build failed, please check the error above.'.brightRed);
-	}
+	// Alert successful build
+	console.log('\nSuccessful build...'.brightGreen);
+	console.log('Happy hacking!'.brightGreen);
 };

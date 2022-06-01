@@ -11,19 +11,24 @@ const app = express();
 
 // Custom cache headers for assets
 const assetHeaders = (req, res, next) => {
-	res.set('Cache-Control', 'public, max-age=31536000, stale-if-error=31536000');
+	// Cache static assets for 1 year and keep old file when revalidating or upon server error
+	res.set('Cache-Control', 'public, max-age=31536000, stale-while-revalidate=86400, stale-if-error=86400');
 	next();
 };
 
-// Middleware
+// Gzip compression for all files
 app.use(compression());
+
+// Serve static files
+// Automatically adds etag and last-modifed headers for conditional requests
 app.use('/css', assetHeaders, express.static(path.join(__dirname, baseDir, '/css')));
 app.use('/js', assetHeaders, express.static(path.join(__dirname, baseDir, '/js')));
 app.use('/img', assetHeaders, express.static(path.join(__dirname, baseDir, '/img')));
 
 // Serve index file
 app.get('/', (req, res) => {
-	res.set('Cache-Control', 'public, max-age=300, stale-while-revalidate=300');
+	// 2 minute browser cache, safe to be cached on CDNs as well, will keep old html file when revalidating or upon a server error
+	res.set('Cache-Control', 'public, max-age=120, stale-while-revalidate=86400, stale-if-error=86400');
 	res.sendFile(path.join(__dirname, baseDir, '/index.html'));
 });
 

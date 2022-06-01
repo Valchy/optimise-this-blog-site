@@ -4,9 +4,13 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>Travell</title>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="css/fonts.css" rel="stylesheet" />
+
 		<link rel="stylesheet" href="css/layout.css" />
 		<link rel="stylesheet" href="css/main.css" />
-		<link rel="stylesheet" href="css/fonts.css" />
 	</head>
 
 	<body class="home page-template-default page page-id-195 wp-embed-responsive theme-travell travell-header-wide travell-header-shadow travell-header-indent travell-animation-kenburns travell-sidebar-none travell-v_1_8">
@@ -17,7 +21,9 @@
 					<div class="travell-site-branding">
 						<h1 class="site-title h1">
 							<a href="/" rel="home">
-								<img loading="eager" decoding="sync" class="travell-logo" src="img/logo_white.png" alt="travell" />
+								<figure>
+									<img loading="lazy" decoding="async" class="travell-logo" src="img/logo_white.png" alt="travell" />
+								</figure>
 							</a>
 						</h1>
 					</div>
@@ -31,9 +37,13 @@
 				<div class="travell-slot-c travell-slot-from-center">
 					<div class="travell-slot-f"></div>
 					<div class="travell-site-branding">
-						<span class="site-title h1"
-							><a href="/" rel="home"> <img loading="lazy" decoding="async" class="travell-logo" src="img/logo_mini.png" alt="travell" /></a
-						></span>
+						<span class="site-title h1">
+							<a href="/" rel="home">
+								<figure>
+									<img loading="lazy" decoding="async" class="travell-logo" src="img/logo_mini.png" alt="travell" />
+								</figure>
+							</a>
+						</span>
 					</div>
 					<div class="travell-slot-f"></div>
 				</div>
@@ -45,7 +55,11 @@
 		<div class="travell-cover travell-cover-color travell-cover-image-text">
 			<div class="travell-cover-item item-overlay travell-item-color-overlay travell-flex align-items-center justify-content-center text-center">
 				<div class="entry-image">
-					<img loading="lazy" decoding="async" src="img/hero.jpg" class="attachment-travell-cover size-travell-cover" alt="" />
+					<picture>
+						<source media="(min-width: 1400px)" srcset="img/hero.jpg" />
+						<source media="(min-width: 900px)" srcset="img/hero-md.jpg" />
+						<img loading="eager" decoding="sync" src="img/hero-sm.jpg" class="attachment-travell-cover size-travell-cover" alt="Guy with map and compas" />
+					</picture>
 				</div>
 
 				<div class="entry-header element-pos-rel cover-entry">
@@ -62,7 +76,11 @@
 						<h3 class="section-title h5"><span>About me</span></h3>
 						<div class="row">
 							<div class="col-12 col-lg-6 text-center">
-								<img loading="lazy" decoding="async" src="img/about.jpg" class="attachment-travell-content size-travell-content" alt="" />
+								<picture>
+									<source media="(min-width: 1000px)" srcset="img/about.jpg" />
+									<source media="(min-width: 650px)" srcset="img/about-md.jpg" />
+									<img loading="lazy" decoding="async" src="img/about-sm.jpg" class="attachment-travell-content size-travell-content" alt="Guy in the woods with a camera" />
+								</picture>
 							</div>
 							<div class="col-12 col-lg-6">
 								<p>
@@ -89,7 +107,13 @@
 						<div class="row">
 							<div class="col-12 col-md-4">
 								<article class="travell-item item-overlay travell-item-gradient cat-item cat-item-1 post-195 page type-page status-publish hentry">
-									<a href="/?cat=1" class="entry-image"><img loading="lazy" decoding="async" src="img/africa.jpg" class="attachment-travell-cat-d3 size-travell-cat-d3" alt="" /></a>
+									<a href="/?cat=1" class="entry-image">
+										<picture>
+											<source media="(min-width: 900px)" srcset="img/africa.jpg" />
+											<source media="(min-width: 600px)" srcset="img/africa-md.jpg" />
+											<img loading="lazy" decoding="async" src="img/africa-sm.jpg" class="attachment-travell-cat-d3 size-travell-cat-d3" alt="Hot air baloons in africa" />
+										</picture>
+									</a>
 
 									<div class="entry-header element-pos-abs element-pos-bottom">
 										<h3 class="entry-title h2 md-h3 sm-h3 no-margin">
@@ -103,7 +127,13 @@
 							</div>
 							<div class="col-12 col-md-4">
 								<article class="travell-item item-overlay travell-item-gradient cat-item cat-item-4 post-195 page type-page status-publish hentry">
-									<a href="/?cat=4" class="entry-image"><img loading="lazy" decoding="async" src="img/asia.jpg" class="attachment-travell-cat-d3 size-travell-cat-d3" alt="" /></a>
+									<a href="/?cat=4" class="entry-image">
+										<picture>
+											<source media="(min-width: 900px)" srcset="img/asia.jpg" />
+											<source media="(min-width: 600px)" srcset="img/asia-md.jpg" />
+											<img loading="lazy" decoding="async" src="img/asia-sm.jpg" class="attachment-travell-cat-d3 size-travell-cat-d3" alt="Mountains in asia" />
+										</picture>
+									</a>
 
 									<div class="entry-header element-pos-abs element-pos-bottom">
 										<h3 class="entry-title h2 md-h3 sm-h3 no-margin">
@@ -117,7 +147,13 @@
 							</div>
 							<div class="col-12 col-md-4">
 								<article class="travell-item item-overlay travell-item-gradient cat-item cat-item-3 post-195 page type-page status-publish hentry">
-									<a href="/?cat=3" class="entry-image"><img loading="lazy" decoding="async" src="img/europe.jpg" class="attachment-travell-cat-d3 size-travell-cat-d3" alt="" /></a>
+									<a href="/?cat=3" class="entry-image">
+										<picture>
+											<source media="(min-width: 900px)" srcset="img/europe.jpg" />
+											<source media="(min-width: 600px)" srcset="img/europe-md.jpg" />
+											<img loading="lazy" decoding="async" src="img/europe-sm.jpg" class="attachment-travell-cat-d3 size-travell-cat-d3" alt="Mountains in Europe" />
+										</picture>
+									</a>
 
 									<div class="entry-header element-pos-abs element-pos-bottom">
 										<h3 class="entry-title h2 md-h3 sm-h3 no-margin">
@@ -169,7 +205,9 @@
 						<div id="custom_html-2" class="widget_text widget widget_custom_html">
 							<div class="textwidget custom-html-widget">
 								<p>
-									<img loading="lazy" decoding="async" src="img/logo_white.png" alt="travell" />
+									<figure>
+										<img loading="lazy" decoding="async" src="img/logo_white.png" alt="travell" />
+									</figure>
 								</p>
 								<p>
 									Copied from the

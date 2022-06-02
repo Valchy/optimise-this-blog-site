@@ -1,41 +1,18 @@
-const cacheName = 'v1';
+const addResourcesToCache = async (resources) => {
+	const cache = await caches.open('v1');
+	await cache.addAll(resources);
+};
 
-// Install service worker
-self.addEventListener('install', (event) => {
-	event.waitUntil(install());
-});
-
-async function install() {
-	const cache = await caches.open(cacheName);
+self.addEventListener('install', async (event) => {
 	const res = await fetch('/api/files');
 	const { success, files } = await res.json();
 
 	// Error handling if no files are found
-	console.log(success, files);
 	if (!success) return;
-	await cache.addAll([...files]);
-}
 
-self.addEventListener('fetch', (event) => {
-	console.log(event.request);
-
-	if (event.request.destination === 'image') {
-		event.respondWith(respondFromCacheOrNetwork(event.request));
-	}
+	event.waitUntil(addResourcesToCache([...files]));
 });
 
-async function respondFromCacheOrNetwork(request) {
-	const cache = await caches.open(cacheName);
-
-	// Respond from the cache
-	const cachedResponse = await cache.match(request);
-	if (cachedResponse) {
-		return cachedResponse;
-	}
-
-	const fetchedResponse = await fetch(request.url);
-	cache.put(request, fetchedResponse.clone());
-
-	// Return the network response
-	return fetchedResponse;
-}
+self.addEventListener('fetch', (event) => {
+	event.respondWith(caches.match(event.request));
+});

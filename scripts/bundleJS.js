@@ -40,4 +40,12 @@ module.exports = async function ($) {
 
 	// Adding js bundle script to html head
 	$('body').append(`<script src="js/bundle.${hash}.min.js"></script>`);
+
+	// Service worker exception (copied and minified over to dist folder)
+	console.log('Converting: js/serviceWorker.js'.red);
+	await minify({
+		compressor: uglifyES,
+		input: path.join(__dirname, '../src/js/serviceWorker.js'),
+		output: path.join(__dirname, '../dist/js/serviceWorker.js'),
+	});
 };

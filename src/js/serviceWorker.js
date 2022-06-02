@@ -1,12 +1,20 @@
-const cacheName = 'AppCache-v1';
+const cacheName = 'v1';
 
+// Install service worker
 self.addEventListener('install', (event) => {
 	event.waitUntil(install());
 });
 
 async function install() {
-	const cache = await caches.open('v1');
-	await cache.addAll(['/', '/img/about.webp']);
+	const cache = await caches.open(cacheName);
+	const res = await fetch('/api/files');
+	const { success, files } = res.json();
+
+	// Error handling if no files are found
+	if (!success) return;
+	console.log(files);
+
+	await cache.addAll(['/', 'js/main.js', 'img/about.jpg']);
 }
 
 self.addEventListener('fetch', (event) => {

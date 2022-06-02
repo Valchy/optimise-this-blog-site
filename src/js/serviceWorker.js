@@ -8,13 +8,12 @@ self.addEventListener('install', (event) => {
 async function install() {
 	const cache = await caches.open(cacheName);
 	const res = await fetch('/api/files');
-	const { success, files } = res.json();
+	const { success, files } = await res.json();
 
 	// Error handling if no files are found
+	console.log(success, files);
 	if (!success) return;
-	console.log(files);
-
-	await cache.addAll(['/', 'js/main.js', 'img/about.jpg']);
+	await cache.addAll([...files]);
 }
 
 self.addEventListener('fetch', (event) => {
@@ -35,10 +34,6 @@ async function respondFromCacheOrNetwork(request) {
 	}
 
 	const fetchedResponse = await fetch(request.url);
-
-	// Add the network response to the cache for future visits.
-	// We need to make a copy of the response to save it in
-	// the cache and use the original as the request response.
 	cache.put(request, fetchedResponse.clone());
 
 	// Return the network response

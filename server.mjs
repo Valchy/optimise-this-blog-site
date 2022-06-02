@@ -14,6 +14,7 @@ const app = express();
 const assetHeaders = (req, res, next) => {
 	// Cache static assets for 1 year on the browser, 7 days on CDNs and keep old file when revalidating or upon server error
 	res.set('Cache-Control', 'public, max-age=31536000, s-maxage=604800, stale-while-revalidate=86400, stale-if-error=86400');
+	res.set('Service-Worker-Allowed', '/'); // Allow static files to be cached by service workers
 	next();
 };
 
@@ -27,7 +28,7 @@ app.use('/js', assetHeaders, express.static(path.join(__dirname, baseDir, '/js')
 app.use('/img', assetHeaders, express.static(path.join(__dirname, baseDir, '/img')));
 
 // Serve index file
-app.get('/', (req, res) => {
+app.get(['/', '/index.html'], (req, res) => {
 	// 2 minute browser cache, 1 minute CDN cache, safe to be cached on CDNs as well, will keep old html file when revalidating or upon a server error
 	res.set('Cache-Control', 'public, max-age=120, s-maxage=60, stale-while-revalidate=86400, stale-if-error=86400');
 	res.sendFile(path.join(__dirname, baseDir, '/index.html'));
@@ -53,8 +54,9 @@ app.get('/api/files', async (req, res) => {
 		res.json({
 			success: true,
 			files: files.map((file) => {
-				file = file.replace(path.join(__dirname, baseDir), '');
-				return file.replace(/\\/g, '/');
+				file = file.replace(path.join(__dirname, baseDir), ''); // Leave relative path
+				file = file.replace('index.html', ''); // Fix service worker bug
+				return file.replace(/\\/g, '/'); // Turn '\' to '/'
 			}),
 		});
 	} catch (err) {
